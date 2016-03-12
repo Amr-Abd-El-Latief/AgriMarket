@@ -44,7 +44,7 @@ public class ProductDaoImp implements ProductDao {
         ArrayList<Product> userProducts = new ArrayList();
         try {
             Statement productsStatement = con.createStatement();
-            ResultSet productsResult = productsStatement.executeQuery("select * from order_product where user_email=" + userEmail + "and order_id=" + order_id);
+            ResultSet productsResult = productsStatement.executeQuery("select * from agri_project.order_product where user_email='" + userEmail + "'and order_id=" + order_id+";");
             while (productsResult.next()) {
                 Product product = getProduct(productsResult.getString("product_id"));
                 product.setQuantity(productsResult.getInt("quantity"));
@@ -77,7 +77,7 @@ public class ProductDaoImp implements ProductDao {
     public Product getProduct(String name) {
         try {
             Statement productStatement = con.createStatement();
-            ResultSet productResult = productStatement.executeQuery("select * from product where name=" + name);
+            ResultSet productResult = productStatement.executeQuery("select * from agri_project.product where name='" + name+"';");
             productResult.next();
             Product product = new Product();
             product.setCategoryId(productResult.getInt("category_id"));
