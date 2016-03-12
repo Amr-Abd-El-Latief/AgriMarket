@@ -20,6 +20,9 @@ public interface ProductDao {
    public List<Product> getAllProducts();
    public Product getProduct(String name);
    public boolean addProduct(Product product);
-   public void updateProduct(Product product);
+   public boolean updateProduct(Product product);
    public ArrayList<Product> searchProduct(String name);
+   public boolean removeProduct(String name);
+   public boolean isExistProduct(Product product);
+   public byte[] getResource(String productName);
 }
