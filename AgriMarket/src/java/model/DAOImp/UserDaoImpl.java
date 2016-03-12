@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DAO.UserDao;
 import model.pojo.Order;
+import model.pojo.Product;
 import model.pojo.User;
 import util.JdbcConnection;
 
@@ -52,7 +53,7 @@ public class UserDaoImpl implements UserDao {
             while (result.next()) {
                 User user = new User();
                 user.setUserName(result.getString("user_name"));
-                user.setBOD(result.getDate("DOB").toLocalDate());
+                user.setDOB(result.getDate("DOB").toLocalDate());
                 user.setCreditNumber(result.getString("credit_number"));
                 user.setEmail(result.getString("email"));
                 user.setImage(result.getBytes("image"));
@@ -70,12 +71,33 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+    public ArrayList<User> getAllUsersLazy() {
+        ArrayList<User> allUser = new ArrayList();
+        try {
+            Statement statment = con.createStatement();
+            ResultSet result = statment.executeQuery("select * from user");
+            while (result.next()) {
+                User user = new User();
+                user.setUserName(result.getString("user_name"));
+                user.setDOB(result.getDate("DOB").toLocalDate());
+                user.setCreditNumber(result.getString("credit_number"));
+                user.setEmail(result.getString("email"));
+                user.setImage(result.getBytes("image"));
+                allUser.add(user);
+            }
+            return allUser;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public ArrayList<String> getAllInterests(String userEmail) {
         ArrayList<String> userInterests = new ArrayList();
         try {
 
             Statement interestsStatements = con.createStatement();
-            ResultSet interestsResult = interestsStatements.executeQuery("select * from interests where email=" + userEmail);
+            ResultSet interestsResult = interestsStatements.executeQuery("select * from interests where email='" + userEmail + "';");
             while (interestsResult.next()) {
                 userInterests.add(interestsResult.getString("name"));
             }
@@ -114,7 +136,7 @@ public class UserDaoImpl implements UserDao {
                 user.setImage(res.getBytes("image"));
                 user.setDOB(res.getDate("DOB").toLocalDate());
                 user.setCreditNumber(res.getString("credit_number"));
-                
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,6 +154,61 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean signUp(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User getUser(String email) {
+
+        try {
+            Statement statment = con.createStatement();
+            ResultSet result = statment.executeQuery("select * from user where email='" + email + "';");
+            result.next();
+            User user = new User();
+            user.setUserName(result.getString("user_name"));
+            user.setDOB(result.getDate("DOB").toLocalDate());
+            user.setCreditNumber(result.getString("credit_number"));
+            user.setEmail(result.getString("email"));
+            user.setImage(result.getBytes("image"));
+            user.setInterests(getAllInterests(result.getString("email")));
+            user.setJob(result.getString("job"));
+            user.setPassword(result.getString("password"));
+            OrderDaoImp orders = new OrderDaoImp();
+            user.setOrders(orders.getAllOrders(result.getString("email")));
+            return user;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
+
+    public static void main(String[] args) {
+        UserDaoImpl user = new UserDaoImpl();
+        /* List<User> userList = user.getAllUsersLazy();
+         System.out.println(userList.size());*/
+        List<User> userList = user.getAllUsers();
+        for (int i = 0; i < userList.size(); i++) {
+            User user1 = (User) userList.get(i);
+            System.out.println("user name : " + user1.getUserName());
+            System.out.println("\t\t interests : ");
+            List<String> interest = user1.getInterests();
+            for (int j = 0; j < interest.size(); j++) {
+                System.out.print("\t\t\t\t" + interest.get(j));
+            }
+            System.out.println();
+            List<Order> orders = user1.getOrders();
+            System.out.println("numbers of order for " + user1.getUserName() + " : " + user1.getOrders().size());
+            for (int s = 0; s < orders.size(); s++) {
+                System.out.println("\t\t order : " + orders.get(s).getId() + " status :" + orders.get(s).getStatus()+" total :"+orders.get(s).getTotal());
+        
+                List<Product> products = orders.get(s).getProducts();
+                for (int j = 0; j < products.size(); j++) {
+                    System.out.println("\t\t\t\t" + products.get(j).getName() + " quantity: " + products.get(j).getQuantity()+" price :"+products.get(j).getPrice());
+                }
+            }
+
+        }
     }
 
 }
