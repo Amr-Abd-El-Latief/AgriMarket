@@ -3,8 +3,6 @@ package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 
@@ -21,13 +19,6 @@ public class JdbcConnection {
 	private JdbcConnection() {
 	}
 
-	private JdbcConnection(String url, String user, String pass) {
-		this.url = url;
-		this.user = user;
-		this.pass = pass;
-		
-		System.out.println("::::: " + user + "/" + pass + "/" + url);
-	}
  
 	public static Connection getConnection() throws SQLException {
             try {
@@ -36,21 +27,9 @@ public class JdbcConnection {
                 if (connection == null) {
                    connection = DriverManager.getConnection(url, user, pass);	   
                 }
-                 
-
             }catch (Exception ex) {
                 ex.printStackTrace();
              }
           return connection;
 	}
-
-	 
-    public static void main(String[] args) {
-            try {
-                Connection con= JdbcConnection.getConnection();
-                con.createStatement();
-            } catch (SQLException ex) {
-                Logger.getLogger(JdbcConnection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }
 }
