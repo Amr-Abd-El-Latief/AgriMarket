@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,15 +17,9 @@
         <link rel="stylesheet" href="../assets/mobirise/css/style.css">
         <link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
 
-
-
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
-        <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/mobirise/css/style.css">
         <link rel="stylesheet" href="../assets/mobirise-gallery/style.css">
         <link rel="stylesheet" href="../assets/mobirise-slider/style.css">
-        <link rel="stylesheet" href="../assets/mobirise/css/mbr-additional.css" type="text/css">
-
     </head>
     <body>
         <section class="engine"><a rel="external" href="https://mobirise.com">Mobirise website making software
@@ -76,100 +72,20 @@
             <div class="container mbr-section__container mbr-gallery-layout-article mbr-section__container--isolated">
                 <div class=" col-sm-8 col-sm-offset-2">
                     <div class="row mbr-gallery-row">
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item" style="width:230px;">
-                            <a href="#lb-gallery2-5" data-slide-to="0" data-toggle="modal">
-                                <img alt="" src="../assets/images/client-2-300x300-19-300x300-85.png">
-                                <h3 class="mbr_figure__caption">mohamed ali</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item" style="width:230px;">
-                            <a href="#lb-gallery2-5" data-slide-to="1" data-toggle="modal">
-                                <img alt="" src="../assets/images/client-2-300x300-2-300x300-92.png">
-                                <h3 class="mbr_figure__caption">mohamed ali</h3>
-                            </a>
-                        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item" style="width:230px;">
-                            <a href="#lb-gallery2-5" data-slide-to="2" data-toggle="modal">
-                                <img alt="" src="../assets/images/client-2-300x300-51-300x300-85.png">
-                                <h3 class="mbr_figure__caption">mohamed ali</h3>
-                            </a>
-                        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item" style="width:230px;">
-                            <a href="#lb-gallery2-5" data-slide-to="3" data-toggle="modal">
-                                <img alt="" src="../assets/images/client-2-300x300-11-300x300-96.png">
-                                <h3 class="mbr_figure__caption">mohamed ali</h3>
-                            </a>
-                        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item" style="width:230px;">
-                            <a href="#lb-gallery2-5" data-slide-to="4" data-toggle="modal">
-                                <img alt="" src="../assets/images/client-2-300x300-24-300x300-28.png">
-                                <h3 class="mbr_figure__caption">mohamed ali</h3>
-                            </a>
-                        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item" style="width:230px;">
-                            <a href="#lb-gallery2-5" data-slide-to="5" data-toggle="modal">
-                                <img alt="" src="../assets/images/client-2-300x300-72-300x300-75.png">
-                                <!-- <span class="icon glyphicon glyphicon-zoom-in"></span>-->
-                                <h3 class="mbr_figure__caption">mohamed ali</h3>
-                            </a>
-                        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item" style="width:230px;">
-                            <a href="#lb-gallery2-5" data-slide-to="6" data-toggle="modal">
-                                <img alt="" src="../assets/images/client-2-300x300-27-300x300-14.png">
-                                <h3 class="mbr_figure__caption">mohamed ali</h3>
-                            </a>
-                        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item" style="width:230px;">
-                            <a href="#lb-gallery2-5" data-slide-to="7" data-toggle="modal">
-                                <img alt="" src="../assets/images/client-2-300x300-25-300x300-44.png">
-                                <h3 class="mbr_figure__caption">mohamed ali</h3>
-                            </a>
-                        </div>
+
+                        <c:forEach items="${sessionScope.users}" var="user">
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mbr-gallery-item" style="width:200px;">
+                                <a href="${pageContext.request.contextPath}/LoadUsersServlet?user=${user.email}" > 
+                                    <img alt="" src="${pageContext.servletContext.contextPath }/LoadImageServlet?param1=${user.email}" style="width:200px;height:150px;">
+                                   </a>
+                                    <center> <h3 class="mbr_figure__caption"> ${user.userName}</h3></center>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
 
-
-
-            <!-- Lightbox -->
-            <div data-app-prevent-settings="" class="mbr-slider modal fade carousel slide" tabindex="-1" data-keyboard="true" data-interval="false" id="lb-gallery2-5">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <ol class="carousel-indicators">
-                                <li data-app-prevent-settings="" data-target="#lb-gallery2-5" data-slide-to="0"></li><li data-app-prevent-settings="" data-target="#lb-gallery2-5" data-slide-to="1"></li><li data-app-prevent-settings="" data-target="#lb-gallery2-5" data-slide-to="2"></li><li data-app-prevent-settings="" data-target="#lb-gallery2-5" data-slide-to="3"></li><li data-app-prevent-settings="" data-target="#lb-gallery2-5" data-slide-to="4"></li><li data-app-prevent-settings="" data-target="#lb-gallery2-5" data-slide-to="5"></li><li data-app-prevent-settings="" data-target="#lb-gallery2-5" data-slide-to="6"></li><li data-app-prevent-settings="" data-target="#lb-gallery2-5" class=" active" data-slide-to="7"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="item">
-                                    <img alt="" src="../assets/images/client-2-300x300-19.png">
-                                </div><div class="item">
-                                    <img alt="" src="../assets/images/client-2-300x300-2.png">
-                                </div><div class="item">
-                                    <img alt="" src="../assets/images/client-2-300x300-51.png">
-                                </div><div class="item">
-                                    <img alt="" src="../assets/images/client-2-300x300-11.png">
-                                </div><div class="item">
-                                    <img alt="" src="../assets/images/client-2-300x300-24.png">
-                                </div><div class="item">
-                                    <img alt="" src="../assets/images/client-2-300x300-72.png">
-                                </div><div class="item">
-                                    <img alt="" src="../assets/images/client-2-300x300-27.png">
-                                </div><div class="item active">
-                                    <img alt="" src="../assets/images/client-2-300x300-25.png">
-                                </div>
-                            </div>
-                            <a class="left carousel-control" role="button" data-slide="prev" href="#lb-gallery2-5">
-                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" role="button" data-slide="next" href="#lb-gallery2-5">
-                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-
-                            <a class="close" href="#" role="button" data-dismiss="modal">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                <span class="sr-only">Close</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
 
 
