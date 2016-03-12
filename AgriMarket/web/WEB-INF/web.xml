@@ -7,9 +7,25 @@
         <servlet-name>signin</servlet-name>
         <servlet-class>controller.SignInController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadUsersServlet</servlet-name>
+        <servlet-class>controller.LoadUsersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadImageServlet</servlet-name>
+        <servlet-class>controller.LoadImageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signin</servlet-name>
         <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadUsersServlet</servlet-name>
+        <url-pattern>/LoadUsersServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadImageServlet</servlet-name>
+        <url-pattern>/LoadImageServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
