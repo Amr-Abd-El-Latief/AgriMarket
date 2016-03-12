@@ -54,7 +54,7 @@
                         <h1 class="mbr-hero__text">AGRIMARKET</h1>
                         <p class="mbr-hero__subtext">Agricultural Market in Egypt</p>
                     </div>
-                    <div class="mbr-buttons btn-inverse mbr-buttons--left"><a class="mbr-buttons__btn btn btn-lg animated fadeInUp delay btn-primary" href="https://mobirise.com">PRODUCT MANAGMENT</a> <a class="mbr-buttons__btn btn btn-lg animated fadeInUp delay btn-info" href="https://mobirise.com">USER MANAGMENT</a></div>
+                    <div class="mbr-buttons btn-inverse mbr-buttons--left"><a class="mbr-buttons__btn btn btn-lg animated fadeInUp delay btn-primary" href="https://mobirise.com">PRODUCT MANAGMENT</a> <a class="mbr-buttons__btn btn btn-lg animated fadeInUp delay btn-info" href="../LoadUsersServlet?key=1">USER MANAGMENT</a></div>
                 </div></div>
             </div></div>
         </div>
