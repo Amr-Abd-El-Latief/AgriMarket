@@ -7,7 +7,6 @@
     <c:redirect url="/admin.jsp" />
 </c:if>--%>
 
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
