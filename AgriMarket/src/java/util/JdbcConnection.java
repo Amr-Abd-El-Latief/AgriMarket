@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class JdbcConnection {
 	
 	private static String user = "root";
-	private static String pass = "";
+	private static String pass = "root";
 	private static String url = "jdbc:mysql://localhost:3306/agri_project";
 	private static Connection connection;
         
