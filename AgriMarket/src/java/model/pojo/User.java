@@ -5,6 +5,7 @@
  */
 package model.pojo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author muhammad
  */
-public class User {
+public class User implements Serializable {
     private String email;
     private String userName;
     private String password;
