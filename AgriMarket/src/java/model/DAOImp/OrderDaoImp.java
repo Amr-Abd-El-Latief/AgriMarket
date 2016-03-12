@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DAO.OrderDao;
 import model.pojo.Order;
+import model.pojo.Product;
 import util.JdbcConnection;
 
 /**
@@ -38,11 +39,18 @@ public class OrderDaoImp implements OrderDao {
         ArrayList<Order> userOrders = new ArrayList();
         try {
             Statement ordersStatements = con.createStatement();
-            ResultSet ordersResult = ordersStatements.executeQuery("select * from order_product where user_email=" + userEmail);
+            ResultSet ordersResult = ordersStatements.executeQuery("select distinct order_id from agri_project.order_product where user_email='" + userEmail + "';");
+
             while (ordersResult.next()) {
+                double total = 0;
                 Order order = getOrder(ordersResult.getInt("order_id"));
-                ProductDaoImp products = new ProductDaoImp();
-                order.setProducts(products.getAllProducts(userEmail, ordersResult.getInt("order_id")));
+                ProductDaoImp product = new ProductDaoImp();
+                ArrayList<Product> products = product.getAllProducts(userEmail, ordersResult.getInt("order_id"));
+                for (Product p : products) {
+                    total += p.getQuantity() * p.getPrice();
+                }
+                order.setProducts(products);
+                order.setTotal(total);
                 userOrders.add(order);
             }
             return userOrders;
@@ -58,14 +66,10 @@ public class OrderDaoImp implements OrderDao {
     }
 
     @Override
-    public Order getOrder(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public Order getOrder(int orderId) {
         try {
             Statement orderStatement = con.createStatement();
-            ResultSet orderResult = orderStatement.executeQuery("select * from order where id=" + orderId);
+            ResultSet orderResult = orderStatement.executeQuery("select * from agri_project.order where id=" + orderId + ";");
             orderResult.next();
             Order order = new Order();
             order.setId(orderId);
