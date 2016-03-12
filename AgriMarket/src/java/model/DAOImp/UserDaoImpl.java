@@ -168,7 +168,8 @@ public class UserDaoImpl implements UserDao {
             user.setDOB(result.getDate("DOB").toLocalDate());
             user.setCreditNumber(result.getString("credit_number"));
             user.setEmail(result.getString("email"));
-            user.setImage(result.getBytes("image"));
+           // user.setImage(result.getBytes("image"));
+            user.setAddress(result.getString("address"));
             user.setInterests(getAllInterests(result.getString("email")));
             user.setJob(result.getString("job"));
             user.setPassword(result.getString("password"));
