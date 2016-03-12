@@ -17,6 +17,15 @@ public class Order {
     private LocalDate date;
     private String status;
     private ArrayList<Product> products = new ArrayList<>();
+    private double total;
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
     public Order() {
     }
@@ -52,6 +61,8 @@ public class Order {
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
+    
+    
     
     
 }
