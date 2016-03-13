@@ -32,9 +32,8 @@ public class ModifyProductController extends HttpServlet {
         String productName = request.getParameter("productName");
         ProductDao productDao = new ProductDaoImp();
         Product product = productDao.getProduct(productName);
-        System.out.println(product.getName());
-        System.out.println(product.getPrice());
-        GsonBuilder builder = new GsonBuilder();
+        System.out.println(product.getCategoryId());
+         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         out.print(gson.toJson(product));
 
