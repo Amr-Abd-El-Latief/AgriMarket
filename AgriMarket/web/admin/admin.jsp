@@ -74,9 +74,10 @@
                             $("#hidden-input").val(data.name);
                             $("#price-modify").val(data.price);
                             $("#quantity-modify").val(data.quantity);
-                            document.getElementById("rdoSelect").selectedIndex = 1;
+                            console.log(data.categoryId);
+                            document.getElementById("rdoSelect").selectedIndex = data.categoryId;
                             
-                            $(".category").val(data.category_id);
+                            $(".category").val(data.categoryId);
                             $("#dec-modify").val(data.desc);
                         }
 
