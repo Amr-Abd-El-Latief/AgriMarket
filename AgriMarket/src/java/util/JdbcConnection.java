@@ -3,13 +3,15 @@ package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
 public class JdbcConnection {
 	
 	private static String user = "root";
-	private static String pass = "root";
+	private static String pass = "";
 	private static String url = "jdbc:mysql://localhost:3306/agri_project";
 	private static Connection connection;
         
@@ -32,4 +34,14 @@ public class JdbcConnection {
              }
           return connection;
 	}
+        
+        public static void main(String[] args) {
+            try {
+                connection=JdbcConnection.getConnection();
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(JdbcConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+    }
 }
